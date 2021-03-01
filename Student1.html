@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">   
+<link rel="stylesheet"
+	  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+   
+<script
+	  src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+   
+<script
+	  src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<script src="​ http://login2explore.com/jpdb/resources/js/0.0.3/jpdb-commons.js​ "></script>
+</head>
+<body>
+Enter Record Number to be Removed
+<br>
+<input type = "number" id = "recId">
+<br>
+<input type = "button" value = "remove" onclick = "deleteDetails();")>
+</body>
+<script>
+	var jsonStr = validateAndGetFormData();
+	if (jsonStr === "") {
+		return;
+	}
+	var remReqStr = createREMOVERecordRequest("90935331|-31948798665708116|90934410",
+			 "School", "STUDENT",$.("#recId").val());
+	alert(putReqStr);
+	jQuery.ajaxSetup({
+		async : false
+	});
+	var resultObj = executeCommandAtBaseUrl(remReqStr,
+			"http://api.login2explore.com:5577", "/api/iml");
+	alert(JSON.stringify(resultObj));
+	jQuery.ajaxSetup({
+		async : true
+	});
+	resetForm();
+</script>
+</html>

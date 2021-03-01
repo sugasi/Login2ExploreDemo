@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script
+	  src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	  src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<script
+		src="​http://login2explore.com/jpdb/resources/js/0.0.3/jpdb-commons.js​"></script>
+<!--  <script src="​ http://login2explore.com/jpdb/resources/js/0.0.3/jpdb-commons.js​ "></script>-->
+</head>
+<body>
+
+	<h1>Insert data to database through jsp</h1>
+	<table border="1">
+		<tr>
+
+			<td>Student Name</td>
+			<td>Department</td>
+			<td>DOB</td>
+			<td>Specialization</td>
+			<td>Semister</td>
+			<td>CGPA</td>
+
+		</tr>
+
+		<form>
+			<tr>
+
+
+				<td><input type="text" id="sname" name="sname"></td>
+				<td><input type="text" id="dept" name="dept"></td>
+				<td><input type="date" id="dob" name="dob"></td>
+				<td><input type="text" id="spec" name="spec"></td>
+				<td><input type="text" id="sem" name="sem"></td>
+				<td><input type="text" id="cgpa" name="cgpa"></td>
+				<input type="hidden" id="sid" name="sid">
+				<td><input type="button" value="Add Details"
+					onclick="addDetails();"></td>
+			</tr>
+
+		</form>
+
+	</table>
+
+	<a href="Student.html">Home</a>
+	<script
+		src="​ http://login2explore.com/jpdb/resources/js/0.0.3/jpdb-commons.js​ "></script>
+	<script>
+$(document).ready(
+function getJSONStr(){
+	 var snameVar = $("#sname").val();
+	     if (snameVar === "") {
+		 alert("Student Name Required Value");
+		 $("#sname").focus();
+		 return "";
+	 }  
+	 var deptVar = $("#dept").val();
+		  if (deptVar === "") {
+		 alert("Department Name Required Value");
+		 $("#dept").focus();
+		 return "";
+	 }  
+	 var dobVar = $("#dob").val();
+	     if (dobVar === "") {
+		 alert("Date of Birth Required Value");
+		 $("#dob").focus();
+		 return "";
+	}  
+	 var semVar = $("#sem").val();
+		 if (semVar === "") {
+		 alert("Sem Required Value");
+		 $("#sem").focus();
+		 return "";
+		 }  	
+	var specVar = $("#spec").val();
+	var cgpaVar = $("cgpa").val();
+		
+	var jsonStrObj = {
+				 sname = snameVar,
+				 dept = deptVar,
+				 dob = dobVar,
+				 spec = specVar,
+				 sem = semVar,
+				 cgpa = cgpaVar,			 
+		 };
+	return JSON.stringify(jsonStrObj);
+}
+
+function resetForm() {    
+	$("#sname").val("");
+	 $("#dept").val("");
+    $("#dob").val("");
+    $("#spec").val(""); 
+	$("#sem").val("");
+	$("#cgpa").val(""); 
+	$("#sname").focus(); 
+}  
+
+function addDetails(){
+	alert("ADL1");
+	var jsonStr = getJSONStr();
+	var putRequest = createPUTRequest("90935331|-31948798678984759|90934418",jsonStr,"School","Student");
+	 jQuery.ajaxSetup({async: false});
+	 var resultObj = executeCommandAtGivenBaseUrl(putReqStr,"http://api.login2explore.com:5577","/api/iml");
+	 alert(JSON.stringify(resultObj));
+	 jQuery.ajaxSetup({async: true});
+	 resetForm(); 	
+	}
+	);
+</script>
+</body>
+</html>
